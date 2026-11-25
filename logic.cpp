@@ -404,7 +404,7 @@ void sortSlotsByDistance(Slot temp[], int count)
 }
 
 // Tìm slot trống gần nhất bằng cách sắp xếp theo heuristic rồi kiểm tra đường đi
-int findNearestSlot(ParkingLot &lot)
+/*int findNearestSlot(ParkingLot &lot)
 {
     Slot *temp = new Slot[lot.slotCount];
     int count = 0;
@@ -440,7 +440,48 @@ int findNearestSlot(ParkingLot &lot)
 
     delete[] temp;
     return -1;
+}*/
+int findNearestSlot(ParkingLot &lot)
+{
+    Position start = {0, 0};
+
+    int bestSlot = -1;
+    int minDistance = 999999;
+
+    // Duyet qua tat ca slot trong bai xe
+    for (int i = 0; i < lot.slotCount; i++)
+    {
+        // Bo qua slot da co xe
+        if (lot.slots[i].occupied)
+        {
+            continue;
+        }
+
+        // Lay vi tri slot hien tai
+        Position goal = lot.slots[i].pos;
+
+        // Kiem tra khoang cach duong di bang A*
+        int distance = getDistance(lot.nodes, start, goal);
+
+        // Neu khong tim thay duong di thi bo qua
+        if (distance == 999999)
+        {
+            continue;
+        }
+
+        // Neu slot nay gan hon slot truoc do
+        if (distance < minDistance)
+        {
+            minDistance = distance;
+            bestSlot = i;
+        }
+    }
+
+    // Tra ve index slot gan nhat
+    // Neu khong co slot thi tra ve -1
+    return bestSlot;
 }
+
 
 // Lưu thông tin xe vào file
 void saveData(ParkingLot &lot, const char *filename)

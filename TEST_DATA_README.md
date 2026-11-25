@@ -34,9 +34,9 @@
 ════════════════════════════════════════════════════════════════
 
 📊 parking_data.txt:
-• 15 xe đang đỗ
+• 7 xe đang đỗ
 • Biển số: ABC123 -> NOP680
-• Slot: P1 -> P15
+• Slot: P1 -> P17
 • Mô phỏng trạng thái bãi xe đầy (~75%)
 
 📊 history.txt:
